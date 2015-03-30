@@ -46,11 +46,16 @@ NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'Shougo/neomru.vim'
 
+" for unite
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/unite-session'
 NeoBundle 'tsukkee/unite-help'
 NeoBundle 'Sixeight/unite-grep'
 NeoBundle 'kmnk/vim-unite-giti'
+
+" for ctrlp
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'vim-scripts/ctrlp-z'
 
 
 NeoBundle 'tpope/vim-fugitive'
@@ -58,11 +63,23 @@ NeoBundle 'flazz/vim-colorschemes'
 "NeoBundle 'godlygeek/csapprox'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'janlay/NERD-tree-project'
+
 NeoBundle 'majutsushi/tagbar'
+NeoBundle 'vim-scripts/taglist.vim'
 
 NeoBundle 'Lokaltog/powerline-fonts'
 NeoBundle 'git@github.com:bling/vim-airline.git'
+NeoBundle 'vim-scripts/L9'
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'terryma/vim-multiple-cursors'
 
+" for fasd
+NeoBundle 'tomtom/tlib_vim'
+NeoBundle 'amiorin/vim-fasd'
+NeoBundle 'marius/unite-fasd'
+
+NeoBundle 'tyru/open-browser.vim'
 
 call neobundle#end()    " End Bundle Installation
 
@@ -78,8 +95,35 @@ NeoBundleCheck
 " normal {{{
 set nu
 colorscheme adrian
+
+if has("win32") || has("win64")
+set guifont=Courier_New:h12
+endif
+set t_Co=256
+"set autochdir
+
+" Set mapleader
+let mapleader=","
+
+" If you like control + arrow key to navigate windows
+" then perform the remapping
+noremap <C-Down>  <C-W>j
+noremap <C-Up>    <C-W>k
+noremap <C-Left>  <C-W>h
+noremap <C-Right> <C-W>l
+nmap <leader>wo <C-w>o
+
 "}}}
 
+"vim paste {{{
+set clipboard=unnamed
+set pastetoggle=<F4>
+"}}}
+
+" 复制到系统剪切板 {{{
+map m "+y
+map <leader>pp "*p
+"}}}
 
 "neocomplcache {{{
 "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
@@ -251,3 +295,121 @@ call airline#add_statusline_func('MyOverride')
 
 "}}}
 
+" NERDTree.vim {{{
+let g:NERDTreeMouseMode=2
+let g:NERDTreeAutoCenter=1
+let g:NERDTreeWinPos="left"
+let g:NERDTreeWinSize=25
+let g:NERDTreeShowLineNumbers=1
+let g:NERDTreeQuitOnOpen=0
+let g:NERDTreeShowHidden=1
+
+
+"let NERDTreeWinPos='left'
+"nnoremap <silent> <leader>f :NERDTreeFind<CR>
+let g:NTPNames = ['.git','build.xml', 'Makefile', '.project', '.lvimrc','Android.mk']
+let g:NTPNames = add(g:NTPNames, 'SConstruct')
+call extend(g:NTPNames, ['*.sln', '*.csproj'])
+
+let g:NTPNamesDirs = ['.git', '*.xcodeproj', '*.xcworkspace']
+
+nmap  <F3> :ToggleNERDTree<cr>
+map <Leader>nn <plug>NERDTreeTabsToggle<CR>
+
+"set rtp+=~/.vim/bundle/NERD_tree-Project 
+"let g:NTPNames = add(g:NTPNames, 'SConstruct')
+"let g:NTPNames = add(g:NTPNames, '.git')
+"extend(g:NTPNames, ['*.sln', '*.csproj','.git','.project','SConstruct'])
+
+"}}}
+
+"for vim-fasd.vim {{{
+nnoremap <Leader>z :Z<CR>
+"}}}
+
+"for ctrlp-z {{{
+let g:ctrlp_z_nerdtree = 1
+let g:ctrlp_extensions = ['Z', 'F']
+nnoremap sz :CtrlPZ<Cr>
+nnoremap sf :CtrlPF<Cr>
+"}}}
+
+"for open-browser {{{
+" This is my setting. 
+let g:netrw_nogx = 1 " disable netrw's gx mapping. 
+"nmap gx <Plug>(openbrowser-smart-search) 
+"vmap gx <Plug>(openbrowser-smart-search) 
+
+
+"" Open URI under cursor. 
+nmap go <Plug>(openbrowser-open) 
+"" Open selected URI. 
+vmap go <Plug>(openbrowser-open) 
+
+" Search word under cursor. 
+nmap gs <Plug>(openbrowser-search) 
+" Search selected word. 
+vmap gs <Plug>(openbrowser-search) 
+
+" If it looks like URI, Open URI under cursor. 
+" Otherwise, Search word under cursor. 
+nmap gx <Plug>(openbrowser-smart-search) 
+" If it looks like URI, Open selected URI. 
+" Otherwise, Search selected word. 
+vmap gx <Plug>(openbrowser-smart-search) 
+
+vnoremap gob :OpenBrowser http://www.baidu.com/s?wd=<C-R>=expand("<cword>")<cr><cr>
+nnoremap gob :OpenBrowser http://www.baidu.com/s?wd=<C-R>=expand("<cword>")<cr><cr>
+
+vnoremap gog :OpenBrowser http://www.google.com/?#newwindow=1&q=<C-R>=expand("<cword>")<cr><cr>
+nnoremap gog :OpenBrowser http://www.google.com/?#newwindow=1&q=<C-R>=expand("<cword>")<cr><cr>
+
+vnoremap goi :OpenBrowserSmartSearch http://www.iciba.com/<C-R>=expand("<cword>")<cr><cr>
+nnoremap goi :OpenBrowserSmartSearch http://www.iciba.com/<C-R>=expand("<cword>")<cr><cr>
+" In command-line 
+":OpenBrowser http://google.com/ 
+":OpenBrowserSearch ggrks 
+":OpenBrowserSmartSearch http://google.com/ 
+":OpenBrowserSmartSearch ggrks 
+"}}}
+
+" Man.vim {{{
+source $VIMRUNTIME/ftplugin/man.vim
+nnoremap <C-A> :Man 3 <cword><CR>
+inoremap <C-A> <ESC>:Man 3 <cword><CR>
+"}}}
+
+"for tag search{{{
+nmap <Leader>tn :tn<cr>
+nmap <Leader>tp :tp<cr>
+
+"}}}
+
+" taglist.vim {{{
+"let Tlist_Ctags_Cmd='/usr/bin/ctags'
+let Tlist_Show_One_File=1
+let Tlist_OnlyWindow=1
+let Tlist_Use_Right_Window=0
+let Tlist_Sort_Type='name'
+let Tlist_Exit_OnlyWindow=1
+let Tlist_Show_Menu=1
+let Tlist_Max_Submenu_Items=10
+let Tlist_Max_Tag_length=20
+let Tlist_Use_SingleClick=0
+let Tlist_Auto_Open=0
+let Tlist_Close_On_Select=0
+let Tlist_File_Fold_Auto_Close=1
+let Tlist_GainFocus_On_ToggleOpen=0
+let Tlist_Process_File_Always=1
+let Tlist_WinHeight=10
+let Tlist_WinWidth=15
+let Tlist_Use_Horiz_Window=0
+let g:Tlist_Auto_Update=1
+let g:Tlist_Enable_Fold_Column=0
+let g:Tlist_Auto_Highlight_Tag=1
+"}}}
+
+" tagbar {{{
+let g:tagbar_left = 1
+nnoremap <silent> <F2> :TagbarToggle<CR>
+"}}}
