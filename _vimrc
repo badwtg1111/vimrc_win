@@ -84,6 +84,16 @@ NeoBundle 'Shougo/neomru.vim'
 
 NeoBundle 'Shougo/neocomplete.vim'
 
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'terryma/vim-multiple-cursors'
+
+
+NeoBundle 'vim-scripts/gtags.vim'
+NeoBundle 'vim-scripts/LargeFile'
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'honza/vim-snippets'
+
 
  call neobundle#end()
 
@@ -229,7 +239,7 @@ let g:ctrlp_session_path = '$VIM/session_files'
 
 " The prefix key.
 nnoremap    [ctrlp]   <Nop>
-nmap  g [ctrlp]
+nmap  f [ctrlp]
 
 nnoremap <silent> [ctrlp]e  :<C-u>CtrlPBuffer<CR>
 nnoremap <leader>e :<C-u>CtrlPBuffer<CR>
