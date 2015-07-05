@@ -649,17 +649,6 @@ call airline#add_statusline_func('MyOverride')
 "}}}
 
 
-"for vim-fasd.vim {{{
-nnoremap <Leader>z :Z<CR>
-"}}}
-
-"for ctrlp-z {{{
-let g:ctrlp_z_nerdtree = 1
-let g:ctrlp_extensions = ['Z', 'F']
-nnoremap sz :CtrlPZ<Cr>
-nnoremap sf :CtrlPF<Cr>
-"}}}
-
 "for open-browser {{{
 " This is my setting. 
 let g:netrw_nogx = 1 " disable netrw's gx mapping. 
@@ -994,6 +983,17 @@ nnoremap <Leader>kk :CtrlPMixed<Cr>
 nnoremap <Leader>pl :<c-u>CtrlPLauncher<cr>
 "}}}
 
+
+"for vim-fasd.vim {{{
+nnoremap <Leader>z :Z<CR>
+"}}}
+
+"for ctrlp-z {{{
+let g:ctrlp_z_nerdtree = 1
+let g:ctrlp_extensions = ['Z', 'F']
+nnoremap sz :CtrlPZ<Cr>
+nnoremap sf :CtrlPF<Cr>
+"}}}
 
 
 "for unite {{{ 
