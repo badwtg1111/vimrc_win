@@ -1310,3 +1310,4 @@ let g:unite_source_gtags_project_config = {
 " '_' in key means default configuration.
 " }}}
 
+"test for git editor
