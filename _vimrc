@@ -1231,6 +1231,7 @@ noremap <silent><leader>vf :Unite -auto-preview -no-split grep:%::<C-r><C-w><CR>
 """ For searching the word in the cursor in all opened buffer
 noremap <silent><leader>va :Unite -auto-preview -no-split grep:$buffers::<C-r><C-w><CR>
 
+nnoremap <silent><leader>vg :Unite -auto-preview -no-split grep/git:.::<C-R><C-w><CR>
 
 "" outline
 "nnoremap <leader>o :Unite -start-insert -no-split outline<CR>
