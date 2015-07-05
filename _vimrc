@@ -184,6 +184,7 @@ Plugin 'tacroe/unite-alias'
 Plugin 'tex/vim-unite-id'
 Plugin 'Shougo/unite-session'
 Plugin 'lambdalisue/unite-grep-vcs'
+Plugin 'sgur/unite-everything'
 
 
 
@@ -1200,6 +1201,7 @@ nnoremap <leader>tf :<C-u>Unite -no-split -buffer-name=files   -start-insert fil
 nnoremap <leader>mr :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
 nnoremap <leader>e :<C-u>Unite -no-split -buffer-name=buffer  buffer<cr>
 nnoremap <leader>tb :<C-u>Unite -no-split -buffer-name=buffer_tab  buffer_tab<cr>
+nnoremap <leader>er :<C-u>Unite -no-split -buffer-name=everything  everything/async<cr>
 
 "" shortcup for key mapping
 nnoremap <silent><leader>u  :<C-u>Unite -start-insert mapping<CR>
